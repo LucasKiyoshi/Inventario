@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Home Page</title>
+</head>
+
+<body>
+
+    <!--NavBar Basica do Site-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-2">
+        <a class="navbar-brand" href="#">UNISO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Alterna navegação">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link active" href="./homePage.html">Home <span class="sr-only">(Página atual)</span></a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="m-2">
+        <h1 class="text-center mt-4"> Inventario de Equipamentos</h1>
+        <div>
+            <div class="m-3 text-center">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalEquipamento">
+                    Novo Equipamento
+                </button>
+
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#ModalRelatorio">
+                    Gerar Relatorio
+                </button>
+            </div>
+
+            <!-- Modal Novo Equipamento-->
+            <div class="modal fade" id="ModalEquipamento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Inventario de um Novo Equipamento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Nome do Colaborador:</label>
+                                <input type="text" class="form-control" id="nome">
+                            </div>
+                            <div class="row">
+                                <div class="mb-3 col-sm-6 col-md-6">
+                                    <label for="name" class="form-label" id="tipo">Tipo:</label>
+                                    <select class="form-control" id="tipo-select">
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="opcao1" value="notebook">Notebook</option>
+                                        <option value="opcao2" value="desktop">Desktop</option>
+                                        <option value="opcao3" value="monitor">Monitor</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-sm-6 col-md-6">
+                                    <label for="name" class="form-label">Service Tag:</label>
+                                    <input type="text" class="form-control" id="st">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="name" class="form-label" id="localizacao">Localização:</label>
+                                <select class="form-control" id="local-select">
+                                    <option value="">Selecione um Local</option>
+                                    <option value="opcao1" value="sp">São Paulo</option>
+                                    <option value="opcao2" value="itape">Itapetininga</option>
+                                    <option value="opcao3" value="soro">Sorocaba</option>
+                                    <option value="opcao3" value="voto">Votorantim</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary" id="addItemBtn">Adicionar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!--Modal Relatorio-->
+            <div class="modal fade" id="ModalRelatorio" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Gerar relatorio</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="mb-3 col-sm-6 col-md-6">
+                                    <label for="name" class="form-label">Localização:</label>
+                                    <select class="form-control" id="tipo-select">
+                                        <option value="">Selecione um local</option>
+                                        <option value="opcao1">São Paulo</option>
+                                        <option value="opcao2">Itapetininga</option>
+                                        <option value="opcao3">Sorocaba</option>
+                                        <option value="opcao3">Votorantim</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-sm-6 col-md-6">
+                                    <label for="name" class="form-label">Tipo:</label>
+                                    <select class="form-control" id="local-select">
+                                        <option value="">Selecione uma opção</option>
+                                        <option value="opcao1">Notebook</option>
+                                        <option value="opcao2">Desktop</option>
+                                        <option value="opcao3">Monitor</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" onclick="gerarRelatorio()">Gerar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!--Tabela de itens inventariados-->
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Tipo</th>
+                        <th scope="col">Local</th>
+                        <th scope="col">Nome</th>
+                        <th scope="col">Service-Tag</th>
+                        <th scope="col">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="itemList">
+                </tbody>
+            </table>
+    </div>
+
+</html>
+
+<script>
+    var items = [];
+
+    function addItem() {
+        var nome = document.getElementById("nome").value;
+        var tipo = document.getElementById("tipo-select");
+        var tipoValue = tipo.options[tipo.selectedIndex].text;
+        var localizacao = document.getElementById("local-select");
+        var localizacaoValue = localizacao.options[localizacao.selectedIndex].text;
+        var serviceTag = document.getElementById("st").value;
+
+        var item = {
+            nome: nome,
+            tipo: tipoValue,
+            localizacao: localizacaoValue,
+            serviceTag: serviceTag
+        };
+
+        items.push(item);
+        clearModalInputs();
+        renderItems();
+    }
+
+
+    function clearModalInputs() {
+        document.getElementById("nome").value = "";
+        document.getElementById("tipo").value = "";
+        document.getElementById("local-select").value = "";
+        document.getElementById("st").value = "";
+    }
+
+
+    function deleteItem(index) {
+        items.splice(index, 1);
+        renderItems();
+    }
+
+    function editItem(index) {
+        var item = items[index];
+        document.getElementById("nome").value = item.nome;
+        document.getElementById("tipo").value = item.tipo;
+        document.getElementById("local-select").value = item.localizacao;
+        document.getElementById("st").value = item.serviceTag;
+
+        document.getElementById("addItem").style.display = "none";
+        document.getElementById("editItemBtn").style.display = "inline";
+        document.getElementById('editItemIndex').value = index
+    }
+
+
+    function saveEditItem() {
+        var index = document.getElementById('editItemIndex').value;
+        var item = items[index];
+
+        item.nome = document.getElementById('noome').value;
+        item.tipo = document.getElementById('tipo').value;
+        item.localizacao = document.getElementById('local-select').value;
+        item.serviceTag = document.getElementById('st').value;
+
+        clearModalInputs();
+
+        document.getElementById('addItemBtn').style.display = 'inline';
+        document.getElementById('aditItemBtn').style.display = 'none';
+        document.getElementById('editItemIndex').value = '';
+
+        renderItems();
+    }
+
+    function renderItems() {
+        var itemList = document.getElementById("itemList");
+        itemList.innerHTML = "";
+
+        for (var i = 0; i < items.length; i++) {
+            var item = items[i];
+            var row = document.createElement("tr");
+            row.innerHTML = "<th scope='row'>" + (i + 1) + "</th>" +
+                "<td>" + item.tipo + "</td>" +
+                "<td>" + item.localizacao + "</td>" +
+                "<td>" + item.nome + "</td>" +
+                "<td>" + item.serviceTag + "</td>" +
+                "<td><button class='btn btn-danger mr-2' onclick='deleteItem(" + i + ")'>Excluir</button></td>"
+                /*"<td><button class='btn btn-primary' onclick='editItem(" + i + ")'>Editar</button></td>" +
+                "<td><button class='btn btn-primary' onclick='gerarTermo(" + i + ")'>Termo</button></td>";*/
+            itemList.appendChild(row);
+        }
+    }
+
+    document.getElementById("addItemBtn").addEventListener("click", function() {
+        addItem();
+    });
+    /*document.getElementById('editItemBtn').addEventListener("click", function() {
+        saveEditedItem()
+    });*/
+
+
+    /*function gerarRelatorio() {
+        var localizacao = document.getElementById("localizacao").value;
+        var tipo = document.getElementById("tipo").value;
+
+        console.log("Relatório gerado com base em Localização: " + localizacao + ", Tipo: " + tipo);
+
+        document.getElementById("local-select").value = "";
+        document.getElementById("tipo").value = "";
+        var modal = new bootstrap.Modal(document.getElementById("ModalRelatorio"));
+        modal.hide();
+    }*/
+</script>
+
+</body>
+
+</html>
